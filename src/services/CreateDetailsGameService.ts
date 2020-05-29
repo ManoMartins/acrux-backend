@@ -3,11 +3,16 @@ import { getCustomRepository } from 'typeorm';
 import DetailsGames from '../models/DetailsGame';
 import DetailsGamesRepository from '../repositories/DetailsGamesRepository';
 
+interface IPlayable {
+  playable_id: string;
+}
+
 interface IRequest {
   title: string;
   release: string;
   main_story: string;
   main_extra: string;
+  playable: IPlayable[];
 }
 
 class CreateDetailsGameService {
@@ -16,6 +21,7 @@ class CreateDetailsGameService {
     release,
     main_story,
     main_extra,
+    playable,
   }: IRequest): Promise<DetailsGames> {
     const detailsGamesRepository = getCustomRepository(DetailsGamesRepository);
     const findSameTitle = await detailsGamesRepository.findByTitle(title);
@@ -29,6 +35,7 @@ class CreateDetailsGameService {
       release,
       main_story,
       main_extra,
+      details_game_playable: playable,
     });
 
     await detailsGamesRepository.save(detailsGame);

@@ -16,7 +16,7 @@ detailsGamesRouter.get('/', async (request, response) => {
 
 detailsGamesRouter.post('/', async (request, response) => {
   try {
-    const { title, release, main_story, main_extra } = request.body;
+    const { title, release, main_story, main_extra, playable } = request.body;
 
     const releaseParsed = format(parseISO(release), 'dd MMMM yyyy');
 
@@ -27,6 +27,7 @@ detailsGamesRouter.post('/', async (request, response) => {
       release: releaseParsed,
       main_story,
       main_extra,
+      playable,
     });
 
     return response.json(detailsGame);

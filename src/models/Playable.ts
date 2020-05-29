@@ -1,34 +1,24 @@
 import {
-  Entity,
   PrimaryGeneratedColumn,
   Column,
-  UpdateDateColumn,
   CreateDateColumn,
+  UpdateDateColumn,
+  Entity,
   OneToMany,
-  JoinColumn,
 } from 'typeorm';
 import DetailsGameRepository from './DetailsGamePlayable';
 
-@Entity('details_games')
-class DetailsGame {
+@Entity('playable')
+class Playable {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  title: string;
-
-  @Column()
-  release: string;
-
-  @Column()
-  main_story: string;
-
-  @Column()
-  main_extra: string;
+  name: string;
 
   @OneToMany(
     () => DetailsGameRepository,
-    detailsGameRepository => detailsGameRepository.details_games,
+    detailsGameRepository => detailsGameRepository.playable,
     {
       cascade: true,
       eager: true,
@@ -43,4 +33,4 @@ class DetailsGame {
   updated_at: Date;
 }
 
-export default DetailsGame;
+export default Playable;

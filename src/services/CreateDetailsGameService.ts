@@ -7,12 +7,17 @@ interface IPlayable {
   playable_id: string;
 }
 
+interface IGenre {
+  genre_id: string;
+}
+
 interface IRequest {
   title: string;
   release: string;
   main_story: string;
   main_extra: string;
   playable: IPlayable[];
+  genre: IGenre[];
 }
 
 class CreateDetailsGameService {
@@ -22,6 +27,7 @@ class CreateDetailsGameService {
     main_story,
     main_extra,
     playable,
+    genre,
   }: IRequest): Promise<DetailsGames> {
     const detailsGamesRepository = getCustomRepository(DetailsGamesRepository);
     const findSameTitle = await detailsGamesRepository.findByTitle(title);
@@ -36,6 +42,7 @@ class CreateDetailsGameService {
       main_story,
       main_extra,
       details_game_playable: playable,
+      details_game_genre: genre,
     });
 
     await detailsGamesRepository.save(detailsGame);

@@ -19,11 +19,11 @@ playableRouter.post('/', async (request, response) => {
 
     const createPlayable = new CreatePlayableService();
 
-    const detailsGame = await createPlayable.execute({
+    const playable = await createPlayable.execute({
       name,
     });
 
-    return response.json(detailsGame);
+    return response.json(playable);
   } catch (err) {
     return response.status(400).json({ error: err.message });
   }

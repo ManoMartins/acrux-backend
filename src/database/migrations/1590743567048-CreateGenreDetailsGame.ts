@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDetailsGamePlayable1590733284806
+export default class CreateGenreDetailsGame1590743567048
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'details_game_playable',
+        name: 'details_game_genre',
         columns: [
           {
             name: 'id',
@@ -20,14 +20,14 @@ export default class CreateDetailsGamePlayable1590733284806
             isNullable: true,
           },
           {
-            name: 'playable_id',
+            name: 'genre_id',
             type: 'uuid',
             isNullable: true,
           },
         ],
         foreignKeys: [
           {
-            name: 'FK_DetailsGames',
+            name: 'FK_details_game_genre',
             columnNames: ['details_game_id'],
             referencedColumnNames: ['id'],
             referencedTableName: 'details_games',
@@ -35,10 +35,10 @@ export default class CreateDetailsGamePlayable1590733284806
             onUpdate: 'CASCADE',
           },
           {
-            name: 'FK_playable',
-            columnNames: ['playable_id'],
+            name: 'FK_genre',
+            columnNames: ['genre_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'playable',
+            referencedTableName: 'genre',
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },
@@ -48,6 +48,6 @@ export default class CreateDetailsGamePlayable1590733284806
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('details_game_playable');
+    await queryRunner.dropTable('details_game_genre');
   }
 }

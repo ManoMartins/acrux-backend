@@ -1,15 +1,16 @@
 import {
   PrimaryGeneratedColumn,
   Column,
+  Entity,
   CreateDateColumn,
   UpdateDateColumn,
-  Entity,
   OneToMany,
 } from 'typeorm';
-import DetailsGamePlayable from './DetailsGamePlayable';
 
-@Entity('playable')
-class Playable {
+import DetailsGameGenre from './DetailsGameGenre';
+
+@Entity('genre')
+class Genres {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,13 +18,13 @@ class Playable {
   name: string;
 
   @OneToMany(
-    () => DetailsGamePlayable,
-    detailsGamePlayable => detailsGamePlayable.playable,
+    () => DetailsGameGenre,
+    detailsGameGenre => detailsGameGenre.genre,
     {
       cascade: true,
     },
   )
-  details_game_playable: DetailsGamePlayable[];
+  details_game_genre: DetailsGameGenre[];
 
   @CreateDateColumn()
   created_at: Date;
@@ -32,4 +33,4 @@ class Playable {
   updated_at: Date;
 }
 
-export default Playable;
+export default Genres;

@@ -5,9 +5,10 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   OneToMany,
-  JoinColumn,
 } from 'typeorm';
-import DetailsGameRepository from './DetailsGamePlayable';
+
+import DetailsGamePlayable from './DetailsGamePlayable';
+import DetailsGameGenre from './DetailsGameGenre';
 
 @Entity('details_games')
 class DetailsGame {
@@ -27,14 +28,22 @@ class DetailsGame {
   main_extra: string;
 
   @OneToMany(
-    () => DetailsGameRepository,
-    detailsGameRepository => detailsGameRepository.details_games,
+    () => DetailsGamePlayable,
+    detailsGamePlayable => detailsGamePlayable.details_games,
     {
       cascade: true,
-      eager: true,
     },
   )
-  details_game_playable: DetailsGameRepository[];
+  details_game_playable: DetailsGamePlayable[];
+
+  @OneToMany(
+    () => DetailsGameGenre,
+    detailsGameGenre => detailsGameGenre.details_games,
+    {
+      cascade: true,
+    },
+  )
+  details_game_genre: DetailsGameGenre[];
 
   @CreateDateColumn()
   created_at: Date;

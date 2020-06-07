@@ -1,44 +1,44 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateGenreDetailsGame1590743567048
+export default class CreateGenreInfoGames1591487578234
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'details_game_genre',
+        name: 'genre_info_games',
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'integer',
             isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
-            name: 'details_game_id',
+            name: 'info_game_id',
             type: 'uuid',
             isNullable: true,
           },
           {
             name: 'genre_id',
-            type: 'uuid',
+            type: 'integer',
             isNullable: true,
           },
         ],
         foreignKeys: [
           {
-            name: 'FK_details_game_genre',
-            columnNames: ['details_game_id'],
+            name: 'FK_InfoGames',
+            columnNames: ['info_game_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'details_games',
+            referencedTableName: 'info_games',
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },
           {
-            name: 'FK_genre',
+            name: 'FK_Genres',
             columnNames: ['genre_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'genre',
+            referencedTableName: 'genres',
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },
@@ -48,6 +48,6 @@ export default class CreateGenreDetailsGame1590743567048
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('details_game_genre');
+    await queryRunner.dropTable('genre_info_games');
   }
 }

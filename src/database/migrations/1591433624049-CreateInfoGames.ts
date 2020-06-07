@@ -1,13 +1,13 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDetailsGames1590641197092
+export default class CreateInfoGames1591433624049
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
 
     await queryRunner.createTable(
       new Table({
-        name: 'details_games',
+        name: 'info_games',
         columns: [
           {
             name: 'id',
@@ -15,6 +15,10 @@ export default class CreateDetailsGames1590641197092
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
+          },
+          {
+            name: 'image',
+            type: 'varchar',
           },
           {
             name: 'title',
@@ -25,12 +29,24 @@ export default class CreateDetailsGames1590641197092
             type: 'varchar',
           },
           {
-            name: 'main_story',
+            name: 'description',
             type: 'varchar',
           },
           {
-            name: 'main_extra',
-            type: 'varchar',
+            name: 'main_story_hours',
+            type: 'integer',
+          },
+          {
+            name: 'main_story_minutes',
+            type: 'integer',
+          },
+          {
+            name: 'main_extra_hours',
+            type: 'integer',
+          },
+          {
+            name: 'main_extra_minutes',
+            type: 'integer',
           },
           {
             name: 'created_at',
@@ -48,6 +64,6 @@ export default class CreateDetailsGames1590641197092
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('details_games');
+    await queryRunner.dropTable('info_games');
   }
 }

@@ -1,44 +1,44 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDetailsGamePlayable1590733284806
+export default class CreatePlatformInfoGames1591442291352
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'details_game_playable',
+        name: 'platform_info_games',
         columns: [
           {
             name: 'id',
-            type: 'uuid',
+            type: 'integer',
             isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
-            name: 'details_game_id',
+            name: 'info_game_id',
             type: 'uuid',
             isNullable: true,
           },
           {
-            name: 'playable_id',
-            type: 'uuid',
+            name: 'platform_id',
+            type: 'integer',
             isNullable: true,
           },
         ],
         foreignKeys: [
           {
-            name: 'FK_DetailsGames',
-            columnNames: ['details_game_id'],
+            name: 'FK_InfoGames',
+            columnNames: ['info_game_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'details_games',
+            referencedTableName: 'info_games',
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },
           {
-            name: 'FK_playable',
-            columnNames: ['playable_id'],
+            name: 'FK_Platform',
+            columnNames: ['platform_id'],
             referencedColumnNames: ['id'],
-            referencedTableName: 'playable',
+            referencedTableName: 'platforms',
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },
@@ -48,6 +48,6 @@ export default class CreateDetailsGamePlayable1590733284806
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('details_game_playable');
+    await queryRunner.dropTable('platform_info_games');
   }
 }

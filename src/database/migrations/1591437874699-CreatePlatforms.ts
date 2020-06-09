@@ -23,6 +23,11 @@ export default class CreatePlatforms1591437874699
             type: 'varchar',
           },
           {
+            name: 'color',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',

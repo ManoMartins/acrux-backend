@@ -19,6 +19,9 @@ class Platform {
   @Column()
   name: string;
 
+  @Column()
+  color: string;
+
   @CreateDateColumn()
   created_at: Date;
 
